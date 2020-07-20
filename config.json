@@ -1,0 +1,61 @@
+{
+    "tables": [
+        {
+            "name": "configuration",
+            "primaryKeys": [
+                "id"
+            ]
+        }
+    ],
+    "joins": [
+        {
+            "leftTable": "configuration",
+            "rightTable": "feature_category",
+            "keys": [
+                {
+                    "left": "id",
+                    "right": "configurationid"
+                }
+            ]
+        },
+        {
+            "leftTable": "configuration",
+            "rightTable": "feature",
+            "keys": [
+                {
+                    "left": "colorid",
+                    "right": "id"
+                }
+            ]
+        },
+        {
+            "leftTable": "configuration",
+            "rightTable": "feature",
+            "keys": [
+                {
+                    "left": "rimid",
+                    "right": "id"
+                }
+            ]
+        },
+        {
+            "leftTable": "feature_category",
+            "rightTable": "feature",
+            "keys": [
+                {
+                    "left": "id",
+                    "right": "feature_categoryid"
+                }
+            ]
+        }
+    ],
+    "fetch": {
+        "table": "configuration",
+        "keys": [
+            {
+                "name": "cc_code",
+                "value": "SDGASDG"
+            }
+        ]
+    }
+}
