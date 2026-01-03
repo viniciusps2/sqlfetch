@@ -14,20 +14,24 @@ public class QueryBuilderService {
         List<String> selectList = new ArrayList<>();
         
         // Build SELECT clause with primary keys from all tables
-        for (Table table : config.getTables()) {
-            for (String key : table.getPrimaryKeys()) {
-                String field = String.format("%s.%s AS %s@%s", 
-                    table.getName(), key, table.getName(), key);
-                selectList.add(field);
+        if (config.getTables() != null) {
+            for (Table table : config.getTables()) {
+                for (String key : table.getPrimaryKeys()) {
+                    String field = String.format("%s.%s AS %s@%s", 
+                        table.getName(), key, table.getName(), key);
+                    selectList.add(field);
+                }
             }
         }
         
         // Build WHERE clause with fetch keys
         List<String> keysList = new ArrayList<>();
-        for (FetchKey key : config.getFetch().getKeys()) {
-            String condition = String.format("%s.%s = '%s'", 
-                config.getFetch().getTable(), key.getName(), key.getValue());
-            keysList.add(condition);
+        if (config.getFetch() != null && config.getFetch().getKeys() != null) {
+            for (FetchKey key : config.getFetch().getKeys()) {
+                String condition = String.format("%s.%s = '%s'", 
+                    config.getFetch().getTable(), key.getName(), key.getValue());
+                keysList.add(condition);
+            }
         }
         
         // Build JOIN clauses
